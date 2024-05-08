@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const app = express();
+require('dotenv').config();
 
 app.use(cors()); // Use CORS to allow all origins (customize as needed)
 
@@ -14,7 +15,7 @@ app.get('/characters', async (req, res) => {
         console.log(`received character ${req.query.characterName}`)
         const response = await axios.get(`https://api.dfoneople.com/df/servers/cain/characters?characterName=${req.query.characterName}`, {
             headers: {
-                'apikey': 'mSegaLMyPdH6ejXGUtDDfMBfT3aFLexL' // Place your API key here
+                'apikey':process.env.apikey // Place your API key here
             }
         });
         res.json(response.data);
